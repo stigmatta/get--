@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 04</title>
+</head>
+
+<body>
+    <template>
+        <table>
+            <tr>
+                <td id="user-id"></td>
+                <td id="just-id"></td>
+                <td id="title"></td>
+                <td id="completed"></td>
+            </tr>
+        </table>
+    </template>
+    <script>
+        let url = "https://jsonplaceholder.typicode.com/todos";
+        fetch(url)
+            .then(response => response.json()) // Исправлено: добавлены скобки
+            .then(data => {
+                displayTable(data);
+            })
+            .catch(error => {
+                console.error('Error', error);
+            });
+
+        function displayTable(data) {
+            let table = document.querySelector("#table");
+            for (let i = 0; i < data.length; i++) {
+                let tr = document.createElement("TR");
+                let user_id = document.createElement("TD");
+                let just_id = document.createElement("TD");
+                let title = document.createElement("TD");
+                let completed = document.createElement("TD");
+
+                user_id.textContent = data[i].userId;
+                just_id.textContent = data[i].id;
+                title.textContent = data[i].title;
+                completed.textContent = data[i].completed;
+
+                tr.appendChild(user_id);
+                tr.appendChild(just_id);
+                tr.appendChild(title);
+                tr.appendChild(completed);
+
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+        };
+    </script>
+    <table id="table"></table>
+</body>
+
+</html>
